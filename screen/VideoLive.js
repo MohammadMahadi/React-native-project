@@ -81,7 +81,9 @@ export default function VideoLive() {
       borderRadius:50,
       height:100,
       width:100,
-      backgroundColor:"blue"
+      borderColor:"pink",
+      borderWidth:5,
+      backgroundColor:"#1da1f2"
     },
     goLiveParent:{
       flex:1,

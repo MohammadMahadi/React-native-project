@@ -1,14 +1,15 @@
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import React from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 
-export default function Popular() {
+export default function Popular({navigation}) {
   return (
     <ScrollView>
       
-    <View style={style.container}>
-      <ImageBackground source={require("../assets/LiveCover/cover1.jpg")} style={style.cover}>
+    <View  style={style.container}>
+     <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+     <ImageBackground  source={require("../assets/LiveCover/cover1.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="graduation-cap" size={19} color="white" />
         <Text style={style.Tag}>Educatinal</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -19,7 +20,10 @@ export default function Popular() {
        <Text style={style.userName}>Mohamma Mahadi</Text>
       </View>
       </ImageBackground>
-      <ImageBackground source={require("../assets/LiveCover/cover3.jpg")} style={style.cover}>
+     </Pressable>
+
+     <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+     <ImageBackground source={require("../assets/LiveCover/cover3.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="music" size={19} color="white" />
         <Text style={style.Tag}>Music_Fun</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -30,10 +34,14 @@ export default function Popular() {
        <Text style={style.userName}>Mohamma Mahadi</Text>
       </View>
       </ImageBackground>
+     </Pressable>
+      
      </View>
 
     <View style={style.container}>
-      <ImageBackground source={require("../assets/LiveCover/cover4.jpg")} style={style.cover}>
+
+    <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+    <ImageBackground source={require("../assets/LiveCover/cover4.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome5 name="smile" size={19} color="white" />
         <Text style={style.Tag}>Rendom Live</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -44,6 +52,9 @@ export default function Popular() {
        <Text style={style.userName}>priyanka das</Text>
       </View>
       </ImageBackground>
+    </Pressable>
+
+      <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
       <ImageBackground source={require("../assets/LiveCover/cover7.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="camera" size={19} color="white" />
         <Text style={style.Tag}>Bloging Live</Text>
@@ -55,10 +66,14 @@ export default function Popular() {
        <Text style={style.userName}>Alivai Bloging Live</Text>
       </View>
       </ImageBackground>
+      </Pressable>
+
      </View>
 
     <View style={style.container}>
-      <ImageBackground source={require("../assets/LiveCover/cover9.jpg")} style={style.cover}>
+
+     <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+     <ImageBackground source={require("../assets/LiveCover/cover9.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="camera" size={19} color="white" />
         <Text style={style.Tag}>Bloging Live</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -69,7 +84,10 @@ export default function Popular() {
        <Text style={style.userName}>John Due</Text>
       </View>
       </ImageBackground>
-      <ImageBackground source={require("../assets/LiveCover/cover11.jpg")} style={style.cover}>
+     </Pressable>
+
+     <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+     <ImageBackground source={require("../assets/LiveCover/cover11.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="book" size={19} color="white" />
         <Text style={style.Tag}>Islamic</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -80,10 +98,13 @@ export default function Popular() {
        <Text style={style.userName}>ali bin salman</Text>
       </View>
       </ImageBackground>
+     </Pressable>
+
      </View>
 
     <View style={style.container}>
-      <ImageBackground source={require("../assets/LiveCover/cover2.jpg")} style={style.cover}>
+     <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+     <ImageBackground source={require("../assets/LiveCover/cover2.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="graduation-cap" size={19} color="white" />
         <Text style={style.Tag}>Educatinal</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -94,6 +115,9 @@ export default function Popular() {
        <Text style={style.userName}>Garoka milu</Text>
       </View>
       </ImageBackground>
+     </Pressable>
+
+      <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
       <ImageBackground source={require("../assets/LiveCover/cover10.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome5 name="smile" size={19} color="white" />
         <Text style={style.Tag}>Rendom Live</Text>
@@ -105,9 +129,11 @@ export default function Popular() {
        <Text style={style.userName}>Shayan Ahammed </Text>
       </View>
       </ImageBackground>
+      </Pressable>
      </View>
 
     <View style={style.container}>
+      <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
       <ImageBackground source={require("../assets/LiveCover/cover5.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="music" size={19} color="white" />
         <Text style={style.Tag}>Music_Fun</Text>
@@ -119,7 +145,10 @@ export default function Popular() {
        <Text style={style.userName}>Dj Sifulllah</Text>
       </View>
       </ImageBackground>
-      <ImageBackground source={require("../assets/LiveCover/cover12.jpg")} style={style.cover}>
+      </Pressable>
+
+     <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
+     <ImageBackground source={require("../assets/LiveCover/cover12.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="camera" size={19} color="white" />
         <Text style={style.Tag}>Educatinal</Text>
         <FontAwesome name="user" size={19} color="white" />
@@ -130,9 +159,12 @@ export default function Popular() {
        <Text style={style.userName}>Shaila akter</Text>
       </View>
       </ImageBackground>
+     </Pressable>
+
      </View>
 
     <View style={style.container}>
+      <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
       <ImageBackground source={require("../assets/LiveCover/cover6.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="camera" size={19} color="white" />
         <Text style={style.Tag}>Bloging Live</Text>
@@ -144,6 +176,9 @@ export default function Popular() {
        <Text style={style.userName}>Zihan khans</Text>
       </View>
       </ImageBackground>
+      </Pressable>
+
+      <Pressable style={style.PrContainer} onPress={()=>navigation.navigate('Host')}>
       <ImageBackground source={require("../assets/LiveCover/cover8.jpg")} style={style.cover}>
       <View style={style.coverDetailTop}><FontAwesome name="music" size={19} color="white" />
         <Text style={style.Tag}>Music_Fun</Text>
@@ -155,8 +190,8 @@ export default function Popular() {
        <Text style={style.userName}>Zafor Ekbal</Text>
       </View>
       </ImageBackground>
+      </Pressable>
      </View>
-
 
     </ScrollView>
   );
@@ -168,8 +203,10 @@ const style=StyleSheet.create({
   },
    cover:{
      margin:3,
-     flex:1,
      height:180
+   },
+   PrContainer:{
+     flex:1
    },
    coverDetailTop:{
      flexDirection:"row",
