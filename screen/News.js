@@ -202,7 +202,6 @@ postSubTitle:{
  fontSize:14,
  flexWrap: 'wrap',
  width:230
-   
 },
   sBadge:{
     backgroundColor:"red",
