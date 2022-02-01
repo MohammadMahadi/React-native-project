@@ -1,49 +1,80 @@
-import React from 'react';
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from 'react';
+import { Image, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { auth } from '../firebase';
 
 
 export default function Signup({navigation}) {
+
+const [email,setEmail]=useState("");
+const [password,setPassword]=useState("");
+    
+const LoginHandler=()=>{
+     auth 
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+
+}
+
+
+useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        navigation.replace("BottomTab")
+      }
+    })
+
+    return unsubscribe
+  }, [])
+  
   return (
-    <View style={style.body}>
+    <KeyboardAvoidingView behavior='position' style={style.kContainer}>
+  <View style={style.body}>
         <View style={style.container}>
     <Image style={style.logo} source={require("../assets/logo3.png")}/>
     </View>
-    <Text style={style.title}>Login Now</Text>
-    <Text style={style.subTitle}>Please Login for contineu Using app</Text>
+    <Text style={style.title}>Log in</Text>
+    <Text style={style.subTitle}>Please fill in details and Login to use this app</Text>
+
     <View style={style.form}>
-    <TextInput style={style.input} placeholder='Email' keyboardType="email-address" />
-    <TextInput style={style.input} placeholder='Password' keyboardType="default"/>
-    <Text style={style.inputDe}>Forgot Password?</Text>
-   <Pressable onPress={()=>navigation.navigate('BottomTab')} style={style.Btn}><Text  style={style.BtnText}>Log in</Text></Pressable>
-   <View style={style.BottomView}><Text style={style.BottomText}>Don't Have an Acount?</Text><Pressable  onPress={() => navigation.navigate('SignUp')}><Text style={style.LoginText}>Sight Up</Text></Pressable></View>
-  </View>
-
-
+    <TextInput value={email} onChangeText={text=>setEmail(text)} style={style.input} placeholder='Email' keyboardType="email-address" />
+    <TextInput value={password} onChangeText={text=>setPassword(text)} style={style.input} placeholder='Password' secureTextEntry/>
+   <Pressable onPress={LoginHandler} style={style.Btn}><Text style={style.BtnText}>Login</Text></Pressable>
+   <View style={style.BottomView}><Text style={style.BottomText}>Don't Have an Acount?</Text><Text onPress={() => navigation.navigate('SignUp')} style={style.LoginText}>Sign up</Text></View>
     </View>
+    </View>
+  </KeyboardAvoidingView>
   );
 }
 
 
 const style=StyleSheet.create({
-    body:{
+    kContainer:{
+       flex:1,
        backgroundColor:"white",
-       padding:10,
     },
+    body:{
+        padding:10,
+     },
     container:{   
-        flex:1,
-        alignItems:"center",
+        alignItems:"center"
     },
     logo:{
         height:150,
         width:150,
-        marginTop:50
-        
     },
     title:{
         fontSize:28,
         color:"black",
         textAlign:"center",
-        marginTop:190,
         fontWeight:"700"
     },
     subTitle:{
@@ -52,7 +83,6 @@ const style=StyleSheet.create({
         marginTop:7,
     },
     form:{
-          
         marginTop:20
     },
    input:{
@@ -66,9 +96,8 @@ const style=StyleSheet.create({
 
    inputDe:{
        fontSize:12,
-       color:"#1da1f2",
-       marginLeft:13,
-       fontWeight:"700"
+       color:"black",
+       marginLeft:13
    },
    Btn:{
        marginTop:20,
@@ -86,7 +115,7 @@ const style=StyleSheet.create({
    BottomView:{
    flexDirection:"row",
    marginTop:10,
-   marginLeft:20
+   marginLeft:20,
    },
    BottomText:{
        fontSize:14,
@@ -96,6 +125,5 @@ const style=StyleSheet.create({
     fontSize:14,
     color:"#1da1f2",
     marginLeft:10,
-    marginBottom:120
    }
 })

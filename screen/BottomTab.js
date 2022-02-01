@@ -1,6 +1,7 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import { Pressable, StyleSheet } from "react-native";
 import Account from "./Acount";
 import Fans from "./Fans";
 import Home from "./Home";
@@ -9,7 +10,7 @@ import News from "./News";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTab() {
+export default function BottomTab({navigation}) {
   return (
      <Tab.Navigator tabBarOptions={{
       labelStyle: {
@@ -40,12 +41,16 @@ export default function BottomTab() {
       <Tab.Screen name="Fans" component={Fans} options={{title:"Friends"}} />
       <Tab.Screen name="Live" component={Live} options={{ unmountOnBlur: true }} />
       <Tab.Screen name="News" component={News} />
-      <Tab.Screen name="Account" component={Account} />
+      <Tab.Screen name="Account" component={Account} options={{title:"Account",headerRight:()=><Pressable onPress={()=>navigation.navigate("EditeAccount")}><FontAwesome5 style={style.EditIcon}  name="user-edit" size={28} color="#1da1f2" /></Pressable>}}/>
     </Tab.Navigator>
   );
 }
 
 
-
+const style = StyleSheet.create({
+  EditIcon:{
+    marginRight:30
+  }
+})
 
 

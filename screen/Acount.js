@@ -1,15 +1,54 @@
+import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
+import HScrollBalance from "../component/HScrollBalance";
+import ProfileImag from "../component/ProfileImag";
+// import { UserName } from "../screen/EditeAccount";
+import { auth } from '../firebase';
 
-export default function Acount() {
+export default function Acount({navigation}) {
+
+  
+const [refreshing, setRefreshing] = React.useState(false);
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+const onRefresh = React.useCallback(() => {
+  setRefreshing(true);
+  wait(2000).then(() => setRefreshing(false));
+}, []);
+
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("Login")
+      })
+      .catch(error => alert(error.message))
+  }
+ 
+ 
+function displayNamef(){
+  const user = auth.currentUser;  
+  if (user !== null){
+    const displayName = user.displayName;
+    return  <Text style={style.AccountName}>{displayName}</Text>
+  }else{
+    return  <Text style={style.AccountName}>Problem User name</Text>
+  }
+}
+
   return (
-    <View style={style.container}>
+    <ScrollView  refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+      />}>
+      <View style={style.container}>
       <View style={style.topContainer}>
-        <Image
-          style={style.AccountPic}
-          source={require("../assets/LiveCover/cover1.jpg")}
-        />
-        <Text style={style.AccountName}>Mohammad Mahadi</Text>
+        <ProfileImag/>
+        {displayNamef()}
         <Text>username:@Mahadi21</Text>
       </View>
       <View style={style.sectionFollow}>
@@ -31,37 +70,54 @@ export default function Acount() {
 
       
       </View>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <View style={style.BalanceInfoContainer}>
-       <View style={style.BalanceContainer}>
-         <Image style={style.Diamond} source={require("../assets/important/Diamond.png")}/>
-        <Text style={style.BalanceCount}>18850</Text>
-       </View>
-        <Text style={style.BalanceInfo}>Account Diamonds</Text>
-        </View>
-        <View style={style.BalanceInfoContainer}>
-       <View style={style.BalanceContainer}>
-         <Image style={style.Diamond} source={require("../assets/important/coin.png")}/>
-        <Text style={style.BalanceCount}>5070</Text>
-       </View>
-        <Text style={style.BalanceInfo}>Account Coins</Text>
-        </View>
-        <View style={style.BalanceInfoContainer}>
-       <View style={style.BalanceContainer}>
-         <Image style={style.Diamond} source={require("../assets/important/dollar.png")}/>
-        <Text style={style.BalanceCount}>7500</Text>
-       </View>
-        <Text style={style.BalanceInfo}>Account Cash</Text>
-        </View>
-        <View style={style.BalanceInfoContainer}>
-       <View style={style.BalanceContainer}>
-         <Image style={style.Diamond} source={require("../assets/important/Diamond.png")}/>
-        <Text style={style.BalanceCount}>18850</Text>
-       </View>
-        <Text style={style.BalanceInfo}>Account Diamonds</Text>
-        </View>
-      </ScrollView>
+     <HScrollBalance/>
+      <View style={style.ListContainer}>
+      <MaterialCommunityIcons name="post-outline" size={30} color="purple" />
+      <Text style={style.ListTitle}>My Posts</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      <View style={style.ListContainer}>
+      <MaterialCommunityIcons name="message-text" size={28} color="purple" />
+      <Text style={style.ListTitle}>Message</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      <View style={style.ListContainer}>
+      <MaterialCommunityIcons name="account-group" size={28} color="purple" />
+      <Text style={style.ListTitle}>Go Family</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      <View style={style.ListContainer}>
+      <MaterialIcons name="store" size={30} color="purple" />
+      <Text style={style.ListTitle}>CR store</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      <View style={style.ListContainer}>
+      <FontAwesome5 name="wallet" size={21} color="purple" />
+      <Text style={style.ListTitle}>CR Wallet</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      <View style={style.ListContainer}>
+      <MaterialIcons name="leaderboard" size={24} color="purple" />
+      <Text style={style.ListTitle}>Top 100</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      <View style={style.ListContainer}>
+      <Ionicons name="ios-settings" size={24} color="purple" />
+      <Text style={style.ListTitle}>Settings</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      
+      <Pressable onPress={handleSignOut}>
+      <View style={style.ListContainer}>
+      <MaterialIcons name="logout" size={24} color="purple" />
+      <Text style={style.ListTitle}>Sign Out</Text>
+      <View  style={style.ListArrowBox}><AntDesign style={style.ListArrow} name="right" size={21} color="gray" /></View>
+      </View>
+      </Pressable>
+      
+
     </View>
+    </ScrollView>
   );
 }
 
@@ -75,11 +131,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
-  },
-  AccountPic: {
-    height: 120,
-    width: 120,
-    borderRadius: 100,
   },
   AccountName: {
     fontSize: 20,
@@ -101,33 +152,23 @@ const style = StyleSheet.create({
     fontSize:16,
     color:"#696969"
   },
- 
-  Diamond:{
-    height:30,
-    width:30,
-    marginRight:5,
-    resizeMode:"contain"
-  },
-  BalanceInfoContainer:{
-    justifyContent:"center",
-    padding:10,
-    width:150,
-    height:100,
-    margin:10,
-    borderRadius:20,
-    backgroundColor:"#FDD6B9"
-   },
-   BalanceContainer:{
+  ListContainer:{
     flexDirection:"row",
-    alignItems:"center"
-   },
-  BalanceCount:{
-  fontWeight:"bold",
-  fontSize:22
+    alignItems:'center',
+    padding:10,
+    borderColor:"#cdcdd2",
+    borderBottomWidth:1,
+    margin:10
   },
-  BalanceInfo:{
-  fontSize:12,
-  color:"#b84e00",
-  fontWeight:"bold"
+  ListTitle:{
+    fontSize:21,
+    fontWeight:"600",
+    marginLeft:10,
+  },
+  ListArrowBox:{
+    width:200
+  },
+  ListArrow:{
+    alignSelf:"flex-end"
   }
 });
